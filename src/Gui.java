@@ -28,7 +28,7 @@ public class Gui extends JFrame{
         formatButtons.add(bold);
         editorPane.setEditable(true);
         editorPane.setContentType("text/html");
-        editorPane.setText("bold");
+        editorPane.setText("plain text");
         System.out.println(editorPane.getEditorKit());
         bold.addActionListener(new buttonClicked());
     }
@@ -48,9 +48,7 @@ public class Gui extends JFrame{
         String s = "";
         System.out.println(editorPane.getText());
         System.out.println("----------------------");
-        editorPane.replaceSelection("nold");
-        System.out.println(editorPane.getText());
-        s = editorPane.getText();
-        editorPane.setText(s);
+        s = "<b>" + editorPane.getSelectedText() + "</b>";
+        editorPane.replaceSelection(s);
     }
 }
