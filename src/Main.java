@@ -1,9 +1,8 @@
 
 public class Main {
-
+    public static Gui ui;
     public static void main(String[] args) {
-        Gui ui = new Gui("Text To HTML - Pashan Irani");
-
+        ui = new Gui("Text To HTML - Pashan Irani");
     }
 
 }
