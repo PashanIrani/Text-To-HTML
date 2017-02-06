@@ -46,7 +46,9 @@ public class Gui extends JFrame{
         italics.addActionListener(new buttonClicked());
     }
 
-
+    public String getEditorPaneString(){
+        return editorPane.getText();
+    }
     class buttonClicked implements ActionListener {
 
         @Override

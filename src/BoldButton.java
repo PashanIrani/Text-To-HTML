@@ -9,6 +9,7 @@ public class BoldButton extends FormatButtons{
     void performAction(JTextPane pane) {
         System.out.println("SENT TO CLASS - BOLD");
         setTextChar('*', pane);
+        Main.replaceTags('*', "<b>", "</b>");
     }
     
 }
