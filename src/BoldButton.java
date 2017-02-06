@@ -1,9 +1,14 @@
+import javax.swing.JTextPane;
 
 public class BoldButton extends FormatButtons{
 
-    void performAction() {
+    public BoldButton(String string) {
+        super(string);
+    }
+
+    void performAction(JTextPane pane) {
         System.out.println("SENT TO CLASS - BOLD");
-        Gui.setTextBold();
+        setTextChar('*', pane);
     }
     
 }
