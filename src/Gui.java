@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,11 +8,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class Gui extends JFrame{
     
     static JTextPane editorPane = new JTextPane();
     JPanel formatButtons = new JPanel();
+    JPanel textInputPanel = new JPanel();
     JLabel label = new JLabel();
     JButton bold = new JButton("BOLD");
     BoldButton boldb = new BoldButton();
@@ -23,13 +28,19 @@ public class Gui extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-        add(formatButtons);
-        formatButtons.add(editorPane);
+        
+        
+        add(formatButtons, BorderLayout.NORTH);
+        add(textInputPanel, BorderLayout.CENTER);
+        
         formatButtons.add(bold);
-        editorPane.setEditable(true);
-        editorPane.setContentType("text/html");
-        editorPane.setText("plain text");
-        System.out.println(editorPane.getEditorKit());
+        
+
+        textInputPanel.add(editorPane);
+        
+        
+        editorPane.setPreferredSize(new Dimension(200, 100));
+        
         bold.addActionListener(new buttonClicked());
     }
     
@@ -45,10 +56,16 @@ public class Gui extends JFrame{
     }
     
     public static void setTextBold(){
-        String s = "";
-        System.out.println(editorPane.getText());
-        System.out.println("----------------------");
-        s = "<b>" + editorPane.getSelectedText() + "</b>";
-        editorPane.replaceSelection(s);
+        StyledDocument doc = editorPane.getStyledDocument();
+        String s = editorPane.getSelectedText();
+        int selectionStart = editorPane.getSelectionStart();
+        int selectionEnd = editorPane.getSelectionEnd();
+        
+       
+        Style style = editorPane.addStyle(s, null);
+        StyleConstants.setBold(style, true);
+        doc.setCharacterAttributes(selectionStart, selectionEnd - selectionStart, style, false);
+        
+        System.out.println(s);
     }
 }
